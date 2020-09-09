@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MovieTrailerApp</string>
+    <string name="app_title">Trailer World</string>
+    <string name="now_playing_movies">Now Playing Movies</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="upcoming_playing_movies">Upcoming  Movies</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated_movies">Top Rated Movies</string>
+    <string name="dummy_movie_title">Movie Title</string>
+    <string name="dummy_movie_rating">0.0</string>
+    <string name="overview">Overview</string>
+    <string name="title_activity_video">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="birthday_txt">Birthday</string>
+    <string name="gender_txt">Gender</string>
+    <string name="pob_txt">Place Of Birth</string>
+    <string name="biography_txt">Biography</string>
+    <string name="movies_done_txt">Known for</string>
+</resources>
