@@ -17,4 +17,8 @@
     <string name="pob_txt">Place Of Birth</string>
     <string name="biography_txt">Biography</string>
     <string name="movies_done_txt">Known for</string>
+    <string name="tmdb_api_key">84c85237fccfe25218451c4279b3de1a</string>
+    <string name="not_found_txt">Not found</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
 </resources>

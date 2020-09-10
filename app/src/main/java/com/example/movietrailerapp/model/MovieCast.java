@@ -5,15 +5,17 @@ public class MovieCast {
     private String castName;
     private String characterRole;
     private String castImageUrl;
+    private String creditId;
 
     public MovieCast() {
     }
 
-    public MovieCast(int castId, String castName, String characterRole, String castImageUrl) {
+    public MovieCast(int castId, String castName, String characterRole, String castImageUrl, String creditId) {
         this.castId = castId;
         this.castName = castName;
         this.characterRole = characterRole;
         this.castImageUrl = castImageUrl;
+        this.creditId = creditId;
     }
 
     public int getCastId() {
@@ -46,5 +48,13 @@ public class MovieCast {
 
     public void setCastImageUrl(String castImageUrl) {
         this.castImageUrl = castImageUrl;
+    }
+
+    public String getCreditId() {
+        return creditId;
+    }
+
+    public void setCreditId(String creditId) {
+        this.creditId = creditId;
     }
 }

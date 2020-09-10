@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -60,15 +61,16 @@ public class MovieCastAdapter extends RecyclerView.Adapter<MovieCastAdapter.Cast
             @Override
             public void onClick(View v) {
                 CastInfoFragment fragment = CastInfoFragment.newInstance();
-                fragment.setCastId(cast.getCastId());
+                fragment.setCastId(cast.getCastName());
                 fragment.show(fm,"MovieCastSheet");
+                //Toast.makeText(context, "Cast : " + cast.getCreditId() + " : " + cast.getCastName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    interface OnCastClickListener{
-        void setOnCastClickListener();
-    }
+
+
+
     @Override
     public int getItemCount() {
         return movieCastArrayList.size();

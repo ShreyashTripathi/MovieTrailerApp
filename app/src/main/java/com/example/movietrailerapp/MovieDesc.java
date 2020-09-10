@@ -1,7 +1,6 @@
 package com.example.movietrailerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -87,7 +85,7 @@ public class MovieDesc extends AppCompatActivity {
     }
 
     private void getAllCasts(String movie_id) {
-        String url="https://api.themoviedb.org/3/movie/"+movie_id+"/credits?api_key=6bab6920aae24c6f79377a7786622ab6";
+        String url="https://api.themoviedb.org/3/movie/"+movie_id+"/credits?api_key="+getResources().getString(R.string.tmdb_api_key);
         Log.d("url_generated",url);
         final String basepath = "https://image.tmdb.org/t/p/w300";
         final JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -100,14 +98,15 @@ public class MovieDesc extends AppCompatActivity {
                         JSONObject jsonObject=jsonArray.getJSONObject(i);
                         String name=jsonObject.getString("name");
                         int id=jsonObject.getInt("cast_id");
+                        String creditId=jsonObject.getString("credit_id");
                         String role=jsonObject.getString("character");
                         String imagepath=basepath+jsonObject.getString("profile_path");
-                        castArrayList.add(new MovieCast(id,name,role,imagepath));
+                        castArrayList.add(new MovieCast(id,name,role,imagepath, creditId));
                     }
                     if(castArrayList.size() == 0)
                         Log.println(Log.ERROR,"MovieDesc","Cast list is empty");
 
-                    MovieCastAdapter movieCastAdapter = new MovieCastAdapter(MovieDesc.this,castArrayList,getSupportFragmentManager());
+                    MovieCastAdapter movieCastAdapter = new MovieCastAdapter(MovieDesc.this,castArrayList, getSupportFragmentManager());
                     movie_cast_rv.setAdapter(movieCastAdapter);
 
                 } catch (JSONException e) {
