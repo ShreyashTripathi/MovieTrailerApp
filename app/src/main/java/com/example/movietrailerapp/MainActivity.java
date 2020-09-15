@@ -1,11 +1,16 @@
 package com.example.movietrailerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,6 +23,7 @@ import com.example.movietrailerapp.adapters.PopularMovieAdapter;
 import com.example.movietrailerapp.adapters.TopRatedMovieAdapter;
 import com.example.movietrailerapp.adapters.UpcomingMovieAdapter;
 import com.example.movietrailerapp.model.MovieEntity;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<MovieEntity> topRatedMovies;
     RequestQueue topRatedRequestQueue;
 
+    LinearLayout linearLayout;
+    TextView titleText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         parseUpcomingJSON();
         parsePopularJSON();
         parseTopRatedJSON();
+
+
     }
 
     private void instantiateUI() {
@@ -91,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         topRatedMovieRv.setLayoutManager(llm4);
         topRatedMovieRv.setHasFixedSize(true);
         topRatedRequestQueue = Volley.newRequestQueue(MainActivity.this);
+
+
+        linearLayout = findViewById(R.id.mainActivityContainer);
+        titleText = findViewById(R.id.title_text);
     }
 
     private void parseNowPlayingJSON() {
@@ -291,4 +305,7 @@ public class MainActivity extends AppCompatActivity {
         topRatedRequestQueue.add(jsonObjectRequest);
     }
 
+    public void startSearchActivity(View view) {
+        startActivity(new Intent(MainActivity.this,SearchMovie.class));
+    }
 }

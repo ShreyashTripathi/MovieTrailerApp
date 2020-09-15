@@ -6,19 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-
+    android:id="@+id/mainActivityContainer"
     >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="@string/app_title"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textColor="@color/accent"
+        android:orientation="horizontal"
         android:background="@color/primary"
-        android:textStyle="bold"
-         />
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_twotone_search_24"
+            android:layout_marginHorizontal="10dp"
+            android:layout_gravity="center_vertical|start"
+            android:onClick="startSearchActivity"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/app_title"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/accent"
+            android:textStyle="bold"
+            android:id="@+id/title_text"
+            />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
