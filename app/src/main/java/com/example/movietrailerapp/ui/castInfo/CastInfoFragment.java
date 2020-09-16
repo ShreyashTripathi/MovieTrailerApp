@@ -1,4 +1,4 @@
-package com.example.movietrailerapp;
+package com.example.movietrailerapp.ui.castInfo;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -20,8 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.adapters.PopularMovieAdapter;
-import com.example.movietrailerapp.model.MovieCast;
 import com.example.movietrailerapp.model.MovieEntity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;

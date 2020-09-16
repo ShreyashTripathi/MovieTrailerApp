@@ -6,13 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movietrailerapp.CastInfoFragment;
+import com.example.movietrailerapp.ui.castInfo.CastInfoFragment;
 import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.model.MovieCast;
 import com.squareup.picasso.Picasso;

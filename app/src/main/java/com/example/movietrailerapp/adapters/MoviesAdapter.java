@@ -2,7 +2,6 @@ package com.example.movietrailerapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,28 +10,27 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movietrailerapp.MovieDesc;
+import com.example.movietrailerapp.ui.movieInfo.MovieDesc;
 import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.model.MovieEntity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.NowPlayingViewHolder> {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.NowPlayingViewHolder> {
     ArrayList<MovieEntity> movieEntities;
     Context context;
 
-    public NowPlayingAdapter(ArrayList<MovieEntity> movieEntities, Context context) {
+    public MoviesAdapter(ArrayList<MovieEntity> movieEntities, Context context) {
         this.movieEntities = movieEntities;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public NowPlayingAdapter.NowPlayingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MoviesAdapter.NowPlayingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.movie_card,parent,false);
         view.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -40,7 +38,7 @@ public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.No
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NowPlayingAdapter.NowPlayingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MoviesAdapter.NowPlayingViewHolder holder, int position) {
         final MovieEntity movieEntity = movieEntities.get(position);
         Picasso.with(context).load(movieEntity.getPosterImagePath()).into(holder.movieImg);
         if(movieEntity.getOriginalTitle().length() > 15)

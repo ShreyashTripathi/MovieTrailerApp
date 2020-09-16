@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movietrailerapp.MovieDesc;
+import com.example.movietrailerapp.ui.movieInfo.MovieDesc;
 import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.model.MovieEntity;
 import com.squareup.picasso.Picasso;

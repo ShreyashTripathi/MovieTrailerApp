@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchMovie"></activity>
+        <activity android:name=".ui.search.SearchMovie"></activity>
         <activity
-            android:name=".MovieDesc"
+            android:name=".ui.movieInfo.MovieDesc"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.movieList.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

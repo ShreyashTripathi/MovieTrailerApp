@@ -1,4 +1,4 @@
-package com.example.movietrailerapp;
+package com.example.movietrailerapp.ui.movieInfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.adapters.MovieCastAdapter;
 import com.example.movietrailerapp.adapters.TrailerAdapter;
 import com.example.movietrailerapp.model.MovieCast;

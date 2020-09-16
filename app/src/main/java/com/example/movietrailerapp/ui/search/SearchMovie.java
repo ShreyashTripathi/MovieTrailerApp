@@ -1,4 +1,4 @@
-package com.example.movietrailerapp;
+package com.example.movietrailerapp.ui.search;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -16,10 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.movietrailerapp.adapters.PopularMovieAdapter;
+import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.adapters.SearchMovieAdapter;
 import com.example.movietrailerapp.model.MovieEntity;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
