@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,12 +33,10 @@ import java.util.ArrayList;
 
 public class SearchMovie extends AppCompatActivity {
 
-    SearchView searchView;
-    RecyclerView result_rv;
-    LinearLayout linearLayout;
-    ArrayList<MovieEntity> movieEntities;
-    RequestQueue requestQueue;
-    SearchMovieViewModel viewModel;
+    private SearchView searchView;
+    private RecyclerView result_rv;
+    private SearchMovieViewModel viewModel;
+    private ProgressBar search_pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +48,28 @@ public class SearchMovie extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(query.length() == 0)
+                /*if(query.length() == 0)
                 {
                     Toast.makeText(SearchMovie.this, "Empty movie name!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //result_rv.setAdapter(null);
+                    enableViews(search_pb);
                     searchMovieByName(query);
                 }
-                return true;
+                return true;*/
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                if(newText.length() >= 1) {
+                    enableViews(search_pb);
+                    searchMovieByName(newText);
+                }
+                else {
+                    disableViews(result_rv);
+                }
+                return true;
             }
         });
     }
@@ -71,6 +79,8 @@ public class SearchMovie extends AppCompatActivity {
         movieList.observe(SearchMovie.this, new Observer<ArrayList<MovieEntity>>() {
             @Override
             public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                disableViews(search_pb);
+                enableViews(result_rv);
                 SearchMovieAdapter adapter = new SearchMovieAdapter(movieEntities, SearchMovie.this);
                 result_rv.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -81,14 +91,20 @@ public class SearchMovie extends AppCompatActivity {
     private void instantiateUI() {
         searchView = findViewById(R.id.search_movie_sv);
         result_rv = findViewById(R.id.search_movie_rv);
-        linearLayout = findViewById(R.id.search_movie_container);
-        movieEntities = new ArrayList<>();
-
+        search_pb = findViewById(R.id.progress_search_movie);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(RecyclerView.VERTICAL);
         result_rv.setLayoutManager(llm);
 
-        requestQueue = Volley.newRequestQueue(this);
     }
+
+    private void enableViews(View view) {
+        view.setVisibility(View.VISIBLE);
+    }
+
+    private void disableViews(View view) {
+        view.setVisibility(View.GONE);
+    }
+
 }

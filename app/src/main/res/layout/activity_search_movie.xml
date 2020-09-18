@@ -32,9 +32,20 @@
         android:id="@+id/search_movie_sv"
         />
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_search_movie"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
+        android:visibility="gone"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search_movie_rv"/>
+        android:id="@+id/search_movie_rv"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

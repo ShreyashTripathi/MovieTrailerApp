@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.movietrailerapp.R;
@@ -34,6 +36,7 @@ public class MovieDesc extends AppCompatActivity {
     RecyclerView movie_cast_rv, movie_trailer_rv;
     TrailerDescViewModel trailerDescViewModel;
     CastListViewModel castListViewModel;
+    ProgressBar cast_pb,trailers_pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class MovieDesc extends AppCompatActivity {
         trailersData.observe(MovieDesc.this, new Observer<ArrayList<TrailerEntity>>() {
             @Override
             public void onChanged(ArrayList<TrailerEntity> trailerEntities) {
+                disableViews(trailers_pb);
+                enableViews(movie_trailer_rv);
                 TrailerAdapter trailerAdapter = new TrailerAdapter(MovieDesc.this,trailerEntities);
                 movie_trailer_rv.setAdapter(trailerAdapter);
             }
@@ -76,6 +81,8 @@ public class MovieDesc extends AppCompatActivity {
         castData.observe(MovieDesc.this, new Observer<ArrayList<MovieCast>>() {
             @Override
             public void onChanged(ArrayList<MovieCast> movieCasts) {
+                disableViews(cast_pb);
+                enableViews(movie_cast_rv);
                 MovieCastAdapter castAdapter = new MovieCastAdapter(MovieDesc.this,movieCasts,getSupportFragmentManager());
                 movie_cast_rv.setAdapter(castAdapter);
             }
@@ -91,7 +98,8 @@ public class MovieDesc extends AppCompatActivity {
         movie_rating_tv = findViewById(R.id.desc_movie_ratings);
         movie_cast_rv = findViewById(R.id.desc_cast_rv);
         movie_trailer_rv = findViewById(R.id.desc_trailers_rv);
-
+        cast_pb = findViewById(R.id.progress_bar_cast_list);
+        trailers_pb = findViewById(R.id.progress_bar_trailers);
 
         LinearLayoutManager llm1 = new LinearLayoutManager(MovieDesc.this);
         llm1.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -105,5 +113,12 @@ public class MovieDesc extends AppCompatActivity {
 
     }
 
+    private void enableViews(View view) {
+        view.setVisibility(View.VISIBLE);
+    }
+
+    private void disableViews(View view) {
+        view.setVisibility(View.GONE);
+    }
 
 }

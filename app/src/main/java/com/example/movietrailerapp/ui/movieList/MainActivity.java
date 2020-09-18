@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.movietrailerapp.R;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     NowPlayingMoviesViewModel nowPlayingMoviesViewModel;
     PopularMoviesViewModel popularMoviesViewModel;
 
+    ProgressBar now_playing_pb,upcoming_pb,popular_pb,top_rated_pb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
         movieList.observe(MainActivity.this, new Observer<ArrayList<MovieEntity>>() {
             @Override
             public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                disableViews(top_rated_pb);
+                enableViews(topRatedMovieRv);
                 Log.d("MainActivity","ArraySize is: " + movieEntities.size());
                 MoviesAdapter moviesAdapter = new MoviesAdapter(movieEntities,MainActivity.this);
                 topRatedMovieRv.setAdapter(moviesAdapter);
@@ -79,11 +83,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void getPopularMovies() {
         LiveData<ArrayList<MovieEntity>> movieList = popularMoviesViewModel.getMovieList("popular");
         movieList.observe(MainActivity.this, new Observer<ArrayList<MovieEntity>>() {
             @Override
             public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                disableViews(popular_pb);
+                enableViews(popularMovieRv);
                 Log.d("MainActivity","ArraySize is: " + movieEntities.size());
                 MoviesAdapter moviesAdapter = new MoviesAdapter(movieEntities,MainActivity.this);
                 popularMovieRv.setAdapter(moviesAdapter);
@@ -96,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         movieList.observe(MainActivity.this, new Observer<ArrayList<MovieEntity>>() {
             @Override
             public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                disableViews(upcoming_pb);
+                enableViews(upcomingMovieRv);
                 Log.d("MainActivity","ArraySize is: " + movieEntities.size());
                 MoviesAdapter moviesAdapter = new MoviesAdapter(movieEntities,MainActivity.this);
                 upcomingMovieRv.setAdapter(moviesAdapter);
@@ -108,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         movieList.observe(MainActivity.this, new Observer<ArrayList<MovieEntity>>() {
             @Override
             public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                disableViews(now_playing_pb);
+                enableViews(nowPlayingMovieRv);
                 Log.d("MainActivity","ArraySize is: " + movieEntities.size());
                 MoviesAdapter moviesAdapter = new MoviesAdapter(movieEntities,MainActivity.this);
                 nowPlayingMovieRv.setAdapter(moviesAdapter);
@@ -148,9 +160,22 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.mainActivityContainer);
         titleText = findViewById(R.id.title_text);
+
+        now_playing_pb = findViewById(R.id.progress_bar_now_playing);
+        upcoming_pb = findViewById(R.id.progress_bar_upcoming);
+        popular_pb = findViewById(R.id.progress_bar_popular);
+        top_rated_pb = findViewById(R.id.progress_bar_top_rated);
     }
 
     public void startSearchActivity(View view) {
         startActivity(new Intent(MainActivity.this, SearchMovie.class));
+    }
+
+    private void enableViews(View view) {
+        view.setVisibility(View.VISIBLE);
+    }
+
+    private void disableViews(View view) {
+        view.setVisibility(View.GONE);
     }
 }

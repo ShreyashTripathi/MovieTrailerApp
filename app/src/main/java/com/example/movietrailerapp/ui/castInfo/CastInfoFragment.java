@@ -1,12 +1,11 @@
 package com.example.movietrailerapp.ui.castInfo;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +16,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.movietrailerapp.R;
 import com.example.movietrailerapp.adapters.MoviesAdapter;
 import com.example.movietrailerapp.model.CastInfo;
@@ -36,9 +29,6 @@ import com.example.movietrailerapp.ui.castInfo.castMovieList.CastMovieListViewMo
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -49,12 +39,10 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
     private TextView name_tv,birthday_tv,gender_tv,bio_tv,pob_tv;
     private RecyclerView cast_movie_rv;
     private String personName;
-    private RequestQueue castDataQueue,creditsDataQueue;
-    private ArrayList<MovieEntity> movieEntities;
-    private LinearLayout birthday_layout,gender_layout,pob_layout,bio_layout,known_for_layout;
+    private LinearLayout birthday_layout,gender_layout,pob_layout,bio_layout,cast_info_layout;
     private CastInfoViewModel castInfoViewModel;
     private CastMovieListViewModel castMovieListViewModel;
-    private String person_id;
+    private ProgressBar cast_movie_pb,cast_info_pb;
 
     public static CastInfoFragment newInstance() {
         return new CastInfoFragment();
@@ -79,6 +67,8 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
             movieList.observe(this, new Observer<ArrayList<MovieEntity>>() {
                 @Override
                 public void onChanged(ArrayList<MovieEntity> movieEntities) {
+                    disableViews(cast_movie_pb);
+                    enableViews(cast_movie_rv);
                     MoviesAdapter moviesAdapter = new MoviesAdapter(movieEntities, requireActivity());
                     cast_movie_rv.setAdapter(moviesAdapter);
                 }
@@ -91,6 +81,8 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
         castInfo.observe(this, new Observer<CastInfo>() {
             @Override
             public void onChanged(final CastInfo castInfo) {
+                disableViews(cast_info_pb);
+                enableViews(cast_info_layout);
                 setCastUIData(castInfo);
                 setCastMovieList(castInfo.getPerson_id());
             }
@@ -105,9 +97,9 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
         bio_tv = view.findViewById(R.id.bio_cast);
         pob_tv = view.findViewById(R.id.pob_cast);
         cast_movie_rv = view.findViewById(R.id.movies_rv_cast);
-        castDataQueue = Volley.newRequestQueue(requireActivity());
-        movieEntities = new ArrayList<>();
-        creditsDataQueue = Volley.newRequestQueue(requireActivity());
+        cast_movie_pb = view.findViewById(R.id.progress_bar_cast_movie);
+        cast_info_pb = view.findViewById(R.id.progress_bar_cast_info);
+        cast_info_layout = view.findViewById(R.id.layout_cast_info);
 
         LinearLayoutManager llm1 = new LinearLayoutManager(requireActivity());
         llm1.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -118,7 +110,6 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
         bio_layout = view.findViewById(R.id.bio_layout);
         gender_layout = view.findViewById(R.id.gender_layout);
         pob_layout = view.findViewById(R.id.pob_layout);
-        known_for_layout = view.findViewById(R.id.movie_rv_layout);
     }
 
     public void setCastId(String personName)
@@ -147,7 +138,7 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
         if(!birthday.equals(""))
             birthday_tv.setText(birthday);
         else
-            disableView(birthday_layout);
+            disableViews(birthday_layout);
 
         if(!gender.equals(""))
         {
@@ -157,22 +148,26 @@ public class CastInfoFragment extends BottomSheetDialogFragment {
                 gender_tv.setText(R.string.male);
         }
         else
-            disableView(gender_layout);
+            disableViews(gender_layout);
 
         if(!biography.equals(""))
             bio_tv.setText(biography);
         else
-            disableView(bio_layout);
+            disableViews(bio_layout);
 
         if(!pob.equals(""))
             pob_tv.setText(pob);
         else
-            disableView(pob_layout);
+            disableViews(pob_layout);
     }
 
-    private void disableView(LinearLayout layout) {
-        layout.setVisibility(View.GONE);
+
+    private void enableViews(View view) {
+        view.setVisibility(View.VISIBLE);
     }
 
+    private void disableViews(View view) {
+        view.setVisibility(View.GONE);
+    }
 
 }
