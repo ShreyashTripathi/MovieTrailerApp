@@ -11,19 +11,23 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.search.SearchMovie"/>
-        <activity
-            android:name=".ui.movieInfo.MovieDesc"
-            android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".ui.movieList.MainActivity">
+        <activity android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.search.SearchMovie" />
+        <activity
+            android:name=".ui.movieInfo.MovieDesc"/>
+        <activity android:name=".ui.movieList.MainActivity">
+        </activity>
 
         <meta-data
+
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>

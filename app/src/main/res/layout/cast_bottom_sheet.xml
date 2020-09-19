@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/box_shape"
     android:id="@+id/castBottomSheetFragment"
+    android:backgroundTint="@color/dark_blue"
     >
 
     <FrameLayout
@@ -95,6 +96,7 @@
                         android:layout_marginEnd="10dp"
                         android:hint="Gender"
                         android:textSize="20sp"
+                        android:textStyle="bold|italic"
                         android:layout_marginRight="10dp"
                         android:id="@+id/gender_cast"
                         />
